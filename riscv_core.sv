@@ -768,10 +768,10 @@ module riscv_core import ibex_pkg::*; #(
   assign data_req_o   = data_req_out & ~pmp_req_err[PMP_D];
   assign lsu_resp_err = lsu_load_err | lsu_store_err;
 
-  LSU_top lsu_block_i #(
+  LSU_top #(
     .DataWidth      (DataWidth),
     .MemECC         (MemECC),
-  )(
+  ) lsu_block_i (
     .clk_i(clk_i),
     .rst_ni(rst_ni),
 
@@ -816,7 +816,7 @@ module riscv_core import ibex_pkg::*; #(
 
     .perf_load_o(perf_load),
     .perf_store_o(perf_store)
-  )
+  );
 
 
   WB_top wb_stage_i(
