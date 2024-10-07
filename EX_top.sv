@@ -114,7 +114,7 @@ module EX_top(
     logic [31:0]           bt_a_operand;
     logic [31:0]           bt_b_operand;
     logic [31:0]           result_ex_o;
-    alu_op_a_MUX(
+    alu_op_a_MUX alu_opa_mux(
     .lsu_addr_incr_req_i(lsu_addr_incr_req_i),    // from LSU
     .lsu_addr_last_i(lsu_addr_last_i),        // from LSU
     
@@ -127,7 +127,7 @@ module EX_top(
     .alu_operand_a_o(alu_operand_a)
     );
     
-    alu_op_b_MUX(
+    alu_op_b_MUX alu_opb_mux(
     .lsu_addr_incr_req_i(lsu_addr_incr_req_i),    // from LSU 
     
     .instr_is_compressed_EX(instr_is_compressed_EX), // from ID/EX pipeline
@@ -142,7 +142,7 @@ module EX_top(
     .alu_operand_b_o(alu_operand_b)
     );
     
-    BTALU_MUX(
+    BTALU_MUX bt_alu_mux(
     .imm_i_type_EX(imm_i_type_EX),          // from ID/EX pipeline
     .imm_b_type_EX(imm_b_type_EX),          // from ID/EX pipeline
     .imm_j_type_EX(imm_j_type_EX),          // from ID/EX pipeline 
@@ -181,7 +181,7 @@ module EX_top(
    
    
     
-   ALU(
+   ALU u_alu(
   .operator_i(alu_operator_EX),
   .operand_a_i(alu_operand_a),
   .operand_b_i(alu_operand_b),
