@@ -416,7 +416,7 @@ module ibex_top import ibex_pkg::*; #(
   /////////////////////////////////
   // Register file Instantiation //
   /////////////////////////////////
-
+/*
   logic rf_alert_major_internal;
   if (RegFile == RegFileFF) begin : gen_regfile_ff
     ibex_register_file_ff #(
@@ -497,7 +497,7 @@ module ibex_top import ibex_pkg::*; #(
       .err_o    (rf_alert_major_internal)
     );
   end
-
+*/
   ///////////////////////////////
   // Scrambling Infrastructure //
   ///////////////////////////////
