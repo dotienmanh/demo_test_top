@@ -616,15 +616,15 @@ module riscv_core import ibex_pkg::*; #(
 
     // REG_FILE
     // read
-    .rf_raddr_a_o      (rf_raddr_a),    // NOT DONE (trong phần REGISTER FILE INTERFACE)
-    .rf_rdata_a_i      (rf_rdata_a),    // NOT DONE (trong phần REGISTER FILE INTERFACE)
-    .rf_raddr_b_o      (rf_raddr_b),    // NOT DONE (trong phần REGISTER FILE INTERFACE)
-    .rf_rdata_b_i      (rf_rdata_b),    // NOT DONE (trong phần REGISTER FILE INTERFACE)
-    .rf_ren_a_o        (rf_ren_a),      // NOT DONE (trong phần REGISTER FILE INTERFACE)
-    .rf_ren_b_o        (rf_ren_b),      // NOT DONE (trong phần REGISTER FILE INTERFACE)
+    .rf_raddr_a_o      (rf_raddr_a),    // DONE (nối tới REGISTER FILE FPGA)
+    .rf_rdata_a_i      (rf_rdata_a),    // DONE (nối tới REGISTER FILE FPGA)
+    .rf_raddr_b_o      (rf_raddr_b),    // DONE (nối tới REGISTER FILE FPGA)
+    .rf_rdata_b_i      (rf_rdata_b),    // DONE (nối tới REGISTER FILE FPGA)
+    .rf_ren_a_o        (rf_ren_a),      // DONE (nối tới REGISTER FILE FPGA)
+    .rf_ren_b_o        (rf_ren_b),      // DONE (nối tới REGISTER FILE FPGA)
 
-    .rf_rdata_a_EX      (rf_rdata_a_ex),       // NOT DONE output logic [31:0] 
-    .rf_rdata_b_EX      (rf_rdata_b_ex),       // NOT DONE output logic [31:0] 
+    .rf_rdata_a_EX      (rf_rdata_a_ex),       // DONE (nối vào input ex_stage) output logic [31:0] 
+    .rf_rdata_b_EX      (rf_rdata_b_ex),       // DONE (nối vào input ex_stage) output logic [31:0] 
     // write
     .rf_wdata_sel_EX    (rf_wdata_sel_ex),   // DONE (nối vào input ex_stage)output ibex_pkg::rf_wd_sel_e
     .rf_we_EX           (rf_we_ex),          // DONE (nối vào input ex_stage)output logic
@@ -707,8 +707,8 @@ module riscv_core import ibex_pkg::*; #(
     .csr_op_EX(csr_op),          // CONNECTED (từ output của id_stage)
     .csr_op_en_EX(csr_op_en),    // CONNECTED (từ output của id_stage)
 
-    .rf_rdata_a_EX    (rf_rdata_a_ex),
-    .rf_rdata_b_EX    (rf_rdata_b_ex),
+    .rf_rdata_a_EX    (rf_rdata_a_ex),  // DONE (nối từ output id_stage)
+    .rf_rdata_b_EX    (rf_rdata_b_ex),  // DONE (nối từ output id_stage)
 
     // WRITE
     .rf_wdata_sel_EX  (rf_wdata_sel_ex),  // CONNECTED (từ output của id_stage)
@@ -982,19 +982,19 @@ module riscv_core import ibex_pkg::*; #(
     .clk_i(clk_i),
     .rst_ni(rst_ni),
 
-    .raddr_a_i(rf_raddr_a),
-    .rdata_a_o(rf_rdata_a),
-    .ren_a_i(rf_ren_a),
+    .raddr_a_i(rf_raddr_a),   // DONE (nối với id_stage)
+    .rdata_a_o(rf_rdata_a),   // DONE (nối với id_stage)
+    .ren_a_i(rf_ren_a),       // DONE (nối với id_stage)
 
-    .raddr_b_i(rf_raddr_b),
-    .rdata_b_o(rf_rdata_b),
-    .ren_b_i(rf_ren_b),
+    .raddr_b_i(rf_raddr_b),   // DONE (nối với id_stage)
+    .rdata_b_o(rf_rdata_b),   // DONE (nối với id_stage)
+    .ren_b_i(rf_ren_b),       // DONE (nối với id_stage)
 
-    .waddr_i(rf_waddr_wb),
-    .wdata_i(rf_wdata_wb_ecc),
-    .we_i(rf_we_wb),
+    .waddr_i(rf_waddr_wb),      // DONE (từ output của ex_stage)
+    .wdata_i(rf_wdata_wb_ecc),  // DONE (assign từ rf_wdata_wb của output ex_stage)
+    .we_i(rf_we_wb),            // DONE (từ output của ex_stage)
 
-    .ecc_err_i(rf_ecc_err_comb)
+    .ecc_err_i(rf_ecc_err_comb)   // DONE ( gán = 0)
   );
 
 
